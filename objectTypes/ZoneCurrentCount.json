@@ -1,0 +1,9 @@
+{
+	"name": "ZoneCurrentCount",
+	"plugin-id": "Text",
+	"sid": 641751523764517,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": []
+}
