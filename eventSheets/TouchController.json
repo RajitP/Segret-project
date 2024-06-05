@@ -2,14 +2,8 @@
 	"name": "TouchController",
 	"events": [
 		{
-			"eventType": "variable",
-			"name": "Variable1",
-			"type": "number",
-			"initialValue": "0",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 521824008112351
+			"eventType": "comment",
+			"text": "On touching any zone, check who the zone belongs to, and associate this touch with that player (by storing unique id of this touch into zone owner). Also store which zone was selected"
 		},
 		{
 			"eventType": "block",
@@ -33,10 +27,10 @@
 						{
 							"id": "pick-by-comparison",
 							"objectClass": "System",
-							"sid": 579297599004795,
+							"sid": 101855007325442,
 							"parameters": {
-								"object": "PlayerObjects",
-								"expression": "PlayerObjects.BelongsTo",
+								"object": "Player",
+								"expression": "Player.BelongsTo",
 								"comparison": 0,
 								"value": "Zone.BelongsTo"
 							}
@@ -45,8 +39,8 @@
 					"actions": [
 						{
 							"id": "set-instvar-value",
-							"objectClass": "PlayerObjects",
-							"sid": 501719219342055,
+							"objectClass": "Player",
+							"sid": 736696872106585,
 							"parameters": {
 								"instance-variable": "CurrentTouchID",
 								"value": "Touch.TouchID"
@@ -54,8 +48,8 @@
 						},
 						{
 							"id": "set-instvar-value",
-							"objectClass": "PlayerObjects",
-							"sid": 822209893682590,
+							"objectClass": "Player",
+							"sid": 783565236770517,
 							"parameters": {
 								"instance-variable": "SelectedZoneID",
 								"value": "Zone.UID"
@@ -77,12 +71,12 @@
 				{
 					"id": "pick-by-comparison",
 					"objectClass": "System",
-					"sid": 145337171357163,
+					"sid": 138611348132234,
 					"parameters": {
-						"object": "PlayerObjects",
+						"object": "Player",
 						"expression": "Touch.TouchID",
 						"comparison": 0,
-						"value": "PlayerObjects.CurrentTouchID"
+						"value": "Player.CurrentTouchID"
 					}
 				}
 			],
@@ -103,11 +97,11 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 966419701370575,
+							"sid": 488252837443799,
 							"parameters": {
 								"first-value": "Zone.UID",
 								"comparison": 1,
-								"second-value": "PlayerObjects.SelectedZoneID"
+								"second-value": "Player.SelectedZoneID"
 							}
 						}
 					],

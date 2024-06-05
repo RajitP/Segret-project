@@ -809,7 +809,28 @@
 		}
 	],
 	"sid": 778984911124051,
-	"nonworld-instances": [],
+	"nonworld-instances": [
+		{
+			"type": "RedPlayerData",
+			"properties": {},
+			"uid": 20,
+			"instanceVariables": {
+				"BelongsTo": "Red",
+				"CurrentTouchID": 0,
+				"SelectedZoneID": 0
+			}
+		},
+		{
+			"type": "BluePlayerData",
+			"properties": {},
+			"uid": 21,
+			"instanceVariables": {
+				"BelongsTo": "Blue",
+				"CurrentTouchID": 0,
+				"SelectedZoneID": 0
+			}
+		}
+	],
 	"effectTypes": [],
 	"width": 960,
 	"height": 1708,
