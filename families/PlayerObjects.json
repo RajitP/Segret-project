@@ -1,0 +1,34 @@
+{
+	"name": "PlayerObjects",
+	"plugin-id": "Sprite",
+	"sid": 521267649112761,
+	"instanceVariables": [
+		{
+			"name": "BelongsTo",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 209541113379144
+		},
+		{
+			"name": "CurrentTouchID",
+			"type": "number",
+			"desc": "Since each player can have one touch at a time, but with multiple players, there can be multiple touches starting and ending at different times, this variable will keep track of touches for each player. Property used in code and is hidden in editor.",
+			"show": false,
+			"sid": 271227002940409
+		},
+		{
+			"name": "SelectedZoneID",
+			"type": "number",
+			"desc": "UID of the zone currently picked to transfer soldiers from ",
+			"show": false,
+			"sid": 129058266409607
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"RedPlayer",
+		"BluePlayer"
+	]
+}

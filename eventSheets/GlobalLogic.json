@@ -1,0 +1,28 @@
+{
+	"name": "GlobalLogic",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "SOLDIER_TRAVEL_SPEED",
+			"type": "number",
+			"initialValue": "150",
+			"comment": "Constant",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 698554818729158
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "SoldierController"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "TouchController"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ZoneController"
+		}
+	],
+	"sid": 228797126610280
+}

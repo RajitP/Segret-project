@@ -19,6 +19,20 @@
 			"name": "Text",
 			"author": "Scirra",
 			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Touch",
+			"name": "Touch",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Bullet",
+			"name": "Bullet",
+			"author": "Scirra",
+			"bundled": false
 		}
 	],
 	"uniqueId": "80c3wybyc5s",
@@ -26,25 +40,50 @@
 		"items": [
 			"Zone",
 			"ZoneCenter",
-			"ZoneCurrentCount"
+			"ZoneCurrentCount",
+			"Sprite",
+			"RedPlayer",
+			"BluePlayer"
 		],
-		"subfolders": []
+		"subfolders": [
+			{
+				"items": [
+					"Text",
+					"DebugText"
+				],
+				"subfolders": [],
+				"name": "Generic Items"
+			},
+			{
+				"items": [
+					"Touch"
+				],
+				"subfolders": [],
+				"name": "Global"
+			}
+		]
 	},
 	"autosaveData": null,
 	"containers": [],
 	"families": {
-		"items": [],
+		"items": [
+			"PlayerObjects"
+		],
 		"subfolders": []
 	},
 	"layouts": {
 		"items": [
-			"Layout 1"
+			"Layout 1",
+			"Prefabs"
 		],
 		"subfolders": []
 	},
 	"eventSheets": {
 		"items": [
-			"Event sheet 1"
+			"GlobalLogic",
+			"SoldierController",
+			"TouchController",
+			"ZoneController"
 		],
 		"subfolders": []
 	},

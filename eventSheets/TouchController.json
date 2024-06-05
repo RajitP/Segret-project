@@ -1,0 +1,130 @@
+{
+	"name": "TouchController",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "Variable1",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 521824008112351
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-touched-object",
+					"objectClass": "Touch",
+					"sid": 600610076191449,
+					"parameters": {
+						"object": "Zone",
+						"type": "start"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 291142375129191,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 579297599004795,
+							"parameters": {
+								"object": "PlayerObjects",
+								"expression": "PlayerObjects.BelongsTo",
+								"comparison": 0,
+								"value": "Zone.BelongsTo"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "PlayerObjects",
+							"sid": 501719219342055,
+							"parameters": {
+								"instance-variable": "CurrentTouchID",
+								"value": "Touch.TouchID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "PlayerObjects",
+							"sid": 822209893682590,
+							"parameters": {
+								"instance-variable": "SelectedZoneID",
+								"value": "Zone.UID"
+							}
+						}
+					],
+					"sid": 763815941358666
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-touch-end",
+					"objectClass": "Touch",
+					"sid": 173544411466569
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 145337171357163,
+					"parameters": {
+						"object": "PlayerObjects",
+						"expression": "Touch.TouchID",
+						"comparison": 0,
+						"value": "PlayerObjects.CurrentTouchID"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 349853261279880,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 219966741938631,
+							"parameters": {
+								"object": "Zone"
+							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 966419701370575,
+							"parameters": {
+								"first-value": "Zone.UID",
+								"comparison": 1,
+								"second-value": "PlayerObjects.SelectedZoneID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-default-color",
+							"objectClass": "Zone",
+							"sid": 805966624631924,
+							"parameters": {
+								"color": "rgbEx(0, 0, 0)"
+							}
+						}
+					],
+					"sid": 867174866591707
+				}
+			]
+		}
+	],
+	"sid": 199694880447167
+}
