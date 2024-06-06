@@ -12,6 +12,16 @@
 			"sid": 698554818729158
 		},
 		{
+			"eventType": "variable",
+			"name": "SOLDIER_SPAWN_RATE",
+			"type": "number",
+			"initialValue": "5",
+			"comment": "Soldiers created in one spawn. The frequency of spawning will be constant throughout the game, ie. every 0.5 seconds, 5 soldiers are spawned",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 470950668286861
+		},
+		{
 			"eventType": "include",
 			"includeSheet": "SoldierController"
 		},

@@ -1,5 +1,254 @@
 {
 	"name": "SoldierController",
-	"events": [],
+	"events": [
+		{
+			"functionName": "SpawnSoldiers",
+			"functionDescription": "Function to spawn all soldiers in a defined order.",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "SourceZoneUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "UID of Zone from which to spawn soldiers",
+					"sid": 813322902019269
+				},
+				{
+					"name": "DestinationZoneUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "UID of zone to send soldiers to",
+					"sid": 899037124483783
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 570286372935914,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Spawning soldiers every 0.5 seconds will be constant"
+				},
+				{
+					"eventType": "variable",
+					"name": "sourceX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 122810105832752
+				},
+				{
+					"eventType": "variable",
+					"name": "sourceY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 798039579189425
+				},
+				{
+					"eventType": "variable",
+					"name": "destinationX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 219064375489905
+				},
+				{
+					"eventType": "variable",
+					"name": "destinationY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 382789822522994
+				},
+				{
+					"eventType": "variable",
+					"name": "angleBetweenZones",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "Angle between the source and destination zones",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 167747447508900
+				},
+				{
+					"eventType": "comment",
+					"text": "If I pick a specific parent object, its specific child will automatically be picked"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Zone",
+							"sid": 202437437784145,
+							"parameters": {
+								"unique-id": "SourceZoneUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 320094532277853,
+							"parameters": {
+								"variable": "sourceX",
+								"value": "ZoneCenter.X"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 641330030090766,
+							"parameters": {
+								"variable": "sourceY",
+								"value": "ZoneCenter.Y"
+							}
+						}
+					],
+					"sid": 394888007548370
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 192563491155358,
+							"parameters": {
+								"object": "Zone"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Zone",
+							"sid": 447297761481569,
+							"parameters": {
+								"unique-id": "DestinationZoneUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 922476750684839,
+							"parameters": {
+								"variable": "destinationX",
+								"value": "ZoneCenter.X"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 521896562203018,
+							"parameters": {
+								"variable": "destinationY",
+								"value": "ZoneCenter.Y"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 700060491752297,
+							"parameters": {
+								"variable": "angleBetweenZones",
+								"value": "angle(sourceX, sourceY, destinationX, destinationY)"
+							}
+						}
+					],
+					"sid": 328834105555371
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-x-seconds",
+							"objectClass": "System",
+							"sid": 236917769099917,
+							"parameters": {
+								"interval-seconds": "0.5"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 509174785033360,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "offset",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "Spawn Offset distance from center for this particular soldier",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 820779681790047
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 960658300729311,
+									"parameters": {
+										"name": "\"Spawn\"",
+										"start-index": "0",
+										"end-index": "SOLDIER_SPAWN_RATE - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 959331998529097,
+									"parameters": {
+										"variable": "offset",
+										"value": "(loopindex - (SOLDIER_SPAWN_RATE/2)) * Soldier.Height"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 450973352875588,
+									"parameters": {
+										"object-to-create": "Soldier",
+										"layer": "0",
+										"x": "sourceX - (offset * sin(angleBetweenZones))",
+										"y": "sourceY - (offset * cos(angleBetweenZones))",
+										"create-hierarchy": false,
+										"template-name": "\"Soldier\""
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "Soldier",
+									"sid": 863618109025954,
+									"parameters": {
+										"angle": "angleBetweenZones"
+									}
+								}
+							],
+							"sid": 601778286719355
+						}
+					]
+				}
+			]
+		}
+	],
 	"sid": 484126003790637
 }

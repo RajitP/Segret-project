@@ -107,12 +107,12 @@
 					],
 					"actions": [
 						{
-							"id": "set-default-color",
-							"objectClass": "Zone",
-							"sid": 805966624631924,
-							"parameters": {
-								"color": "rgbEx(0, 0, 0)"
-							}
+							"callFunction": "SpawnSoldiers",
+							"sid": 572201695609683,
+							"parameters": [
+								"Player.SelectedZoneID",
+								"Zone.UID"
+							]
 						}
 					],
 					"sid": 867174866591707
