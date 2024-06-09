@@ -4,11 +4,32 @@
 	"sid": 496755472346226,
 	"instanceVariables": [
 		{
-			"name": "BelongsTo",
+			"name": "PlayerColor",
 			"type": "string",
 			"desc": "",
 			"show": true,
 			"sid": 668012449937837
+		},
+		{
+			"name": "SpawnFrequency",
+			"type": "number",
+			"desc": "Interval in seconds in which to spawn soldiers",
+			"show": true,
+			"sid": 880605719972262
+		},
+		{
+			"name": "SpawnBatchSize",
+			"type": "number",
+			"desc": "Determine how many soldiers should spawn in a row every SpawnFrequency seconds",
+			"show": true,
+			"sid": 612435320663390
+		},
+		{
+			"name": "SoldierTravelSpeed",
+			"type": "number",
+			"desc": "Speed at which soldiers travel after spawning",
+			"show": true,
+			"sid": 144183493312316
 		},
 		{
 			"name": "CurrentTouchID",

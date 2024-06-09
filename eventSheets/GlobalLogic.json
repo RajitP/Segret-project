@@ -32,6 +32,22 @@
 		{
 			"eventType": "include",
 			"includeSheet": "ZoneController"
+		},
+		{
+			"eventType": "comment",
+			"text": "Things done till now:\nDragging from one zone to other to spawn soldiers\nspawning of soldiers in the correct batch size\nBasic player properties\n\nThings to do next:\nAdd animations (not frames) to zones and soldiers for different colors\nSoldier reaching destination zone and resulting logics (different logics if destination is neutral, friendly or enemy)\nLogic for autogenerating soldiers in zones\n",
+			"text-color": [
+				0.23921568627450981,
+				0.23921568627450981,
+				0.23921568627450981,
+				1
+			],
+			"background-color": [
+				0.9921568627450981,
+				0.996078431372549,
+				0.7450980392156863,
+				1
+			]
 		}
 	],
 	"sid": 228797126610280

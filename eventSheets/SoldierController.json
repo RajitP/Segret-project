@@ -22,6 +22,13 @@
 					"initialValue": "0",
 					"comment": "UID of zone to send soldiers to",
 					"sid": 899037124483783
+				},
+				{
+					"name": "colourToSpawn",
+					"type": "string",
+					"initialValue": "",
+					"comment": "Color of soldier to spawn (case sensitive string; red/blue)",
+					"sid": 499903808441665
 				}
 			],
 			"eventType": "function-block",
@@ -29,10 +36,6 @@
 			"actions": [],
 			"sid": 570286372935914,
 			"children": [
-				{
-					"eventType": "comment",
-					"text": "Spawning soldiers every 0.5 seconds will be constant"
-				},
 				{
 					"eventType": "variable",
 					"name": "sourceX",
@@ -84,10 +87,6 @@
 					"sid": 167747447508900
 				},
 				{
-					"eventType": "comment",
-					"text": "If I pick a specific parent object, its specific child will automatically be picked"
-				},
-				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -96,6 +95,15 @@
 							"sid": 202437437784145,
 							"parameters": {
 								"unique-id": "SourceZoneUID"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "Zone",
+							"sid": 854380558965514,
+							"parameters": {
+								"child": "ZoneCenter",
+								"which": "own"
 							}
 						}
 					],
@@ -122,6 +130,10 @@
 					"sid": 394888007548370
 				},
 				{
+					"eventType": "comment",
+					"text": "Pick only works from the last pool of picked items. Hence to pick something that was excluded in the last pick, I reset the pick by \"pick all\", and then picked what I wanted to pick"
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -138,6 +150,15 @@
 							"sid": 447297761481569,
 							"parameters": {
 								"unique-id": "DestinationZoneUID"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "Zone",
+							"sid": 545313401878663,
+							"parameters": {
+								"child": "ZoneCenter",
+								"which": "own"
 							}
 						}
 					],
@@ -168,6 +189,14 @@
 								"variable": "angleBetweenZones",
 								"value": "angle(sourceX, sourceY, destinationX, destinationY)"
 							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "DebugText",
+							"sid": 651166145442320,
+							"parameters": {
+								"text": "angleBetweenZones"
+							}
 						}
 					],
 					"sid": 328834105555371
@@ -176,11 +205,22 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 698342504345180,
+							"parameters": {
+								"object": "Player",
+								"expression": "Player.PlayerColor",
+								"comparison": 0,
+								"value": "colourToSpawn"
+							}
+						},
+						{
 							"id": "every-x-seconds",
 							"objectClass": "System",
-							"sid": 236917769099917,
+							"sid": 109525860526464,
 							"parameters": {
-								"interval-seconds": "0.5"
+								"interval-seconds": "Player.SpawnFrequency"
 							}
 						}
 					],
@@ -203,11 +243,11 @@
 								{
 									"id": "for",
 									"objectClass": "System",
-									"sid": 960658300729311,
+									"sid": 544587565363518,
 									"parameters": {
 										"name": "\"Spawn\"",
 										"start-index": "0",
-										"end-index": "SOLDIER_SPAWN_RATE - 1"
+										"end-index": "Player.SpawnBatchSize - 1"
 									}
 								}
 							],
@@ -215,21 +255,21 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 959331998529097,
+									"sid": 209712956556842,
 									"parameters": {
 										"variable": "offset",
-										"value": "(loopindex - (SOLDIER_SPAWN_RATE/2)) * Soldier.Height"
+										"value": "(loopindex - (Player.SpawnBatchSize/2)) * Soldier.Height"
 									}
 								},
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 450973352875588,
+									"sid": 728332358958088,
 									"parameters": {
 										"object-to-create": "Soldier",
 										"layer": "0",
 										"x": "sourceX - (offset * sin(angleBetweenZones))",
-										"y": "sourceY - (offset * cos(angleBetweenZones))",
+										"y": "sourceY + (offset * cos(angleBetweenZones))",
 										"create-hierarchy": false,
 										"template-name": "\"Soldier\""
 									}
@@ -240,6 +280,33 @@
 									"sid": 863618109025954,
 									"parameters": {
 										"angle": "angleBetweenZones"
+									}
+								},
+								{
+									"id": "set-speed",
+									"objectClass": "Soldier",
+									"sid": 225428499782105,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "Player.SoldierTravelSpeed"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Soldier",
+									"sid": 341941964417762,
+									"parameters": {
+										"instance-variable": "DestinationZoneUID",
+										"value": "DestinationZoneUID"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Soldier",
+									"sid": 536976498650368,
+									"parameters": {
+										"instance-variable": "BelongsTo",
+										"value": "Player.PlayerColor"
 									}
 								}
 							],

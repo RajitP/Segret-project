@@ -10,6 +10,13 @@
 			"desc": "Can either belong to Red or Blue. Cannot be neutral. (Case sensitive spellings) ",
 			"show": true,
 			"sid": 664226608390841
+		},
+		{
+			"name": "DestinationZoneUID",
+			"type": "number",
+			"desc": "UID of this soldier's destination",
+			"show": true,
+			"sid": 702374516703933
 		}
 	],
 	"behaviorTypes": [

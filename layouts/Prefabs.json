@@ -380,7 +380,8 @@
 					},
 					"uid": 11,
 					"instanceVariables": {
-						"BelongsTo": "Red"
+						"BelongsTo": "Red",
+						"DestinationZoneUID": 0
 					},
 					"behaviors": {
 						"Bullet": {
@@ -434,6 +435,10 @@
 										"state": [
 											{
 												"iv": "BelongsTo",
+												"state": true
+											},
+											{
+												"iv": "DestinationZoneUID",
 												"state": true
 											}
 										]

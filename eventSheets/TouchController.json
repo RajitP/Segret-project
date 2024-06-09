@@ -3,7 +3,7 @@
 	"events": [
 		{
 			"eventType": "comment",
-			"text": "On touching any zone, check who the zone belongs to, and associate this touch with that player (by storing unique id of this touch into zone owner). Also store which zone was selected"
+			"text": "On touching any zone, check who the zone belongs to. Eg touch#38 was done by player 1, hence Player1 object stores touchID=38. Also store zoneID to remember which zone was selected"
 		},
 		{
 			"eventType": "block",
@@ -25,14 +25,24 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "compare-instance-variable",
+							"objectClass": "Zone",
+							"sid": 528353413376530,
+							"parameters": {
+								"instance-variable": "BelongsTo",
+								"comparison": 1,
+								"value": "\"Neutral\""
+							}
+						},
+						{
 							"id": "pick-by-comparison",
 							"objectClass": "System",
-							"sid": 101855007325442,
+							"sid": 906122142046089,
 							"parameters": {
 								"object": "Player",
-								"expression": "Player.BelongsTo",
+								"expression": "Zone.BelongsTo",
 								"comparison": 0,
-								"value": "Zone.BelongsTo"
+								"value": "Player.PlayerColor"
 							}
 						}
 					],
@@ -59,6 +69,10 @@
 					"sid": 763815941358666
 				}
 			]
+		},
+		{
+			"eventType": "comment",
+			"text": "On leaving any touch, check if the touch ended on a zone, and as long as touch didn't end on the same zone that it started on, call function to spawn soldiers"
 		},
 		{
 			"eventType": "block",
@@ -108,10 +122,11 @@
 					"actions": [
 						{
 							"callFunction": "SpawnSoldiers",
-							"sid": 572201695609683,
+							"sid": 416417778571477,
 							"parameters": [
 								"Player.SelectedZoneID",
-								"Zone.UID"
+								"Zone.UID",
+								"Player.PlayerColor"
 							]
 						}
 					],

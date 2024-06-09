@@ -1,5 +1,184 @@
 {
 	"name": "ZoneController",
-	"events": [],
+	"events": [
+		{
+			"functionName": "SetZoneColour",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "zoneUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 891813299503690
+				},
+				{
+					"name": "colorToSet",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 556958657582432
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 193078989321188,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Zone",
+							"sid": 878682960933504,
+							"parameters": {
+								"unique-id": "zoneUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Zone",
+							"sid": 192498039206199,
+							"parameters": {
+								"instance-variable": "BelongsTo",
+								"value": "colorToSet"
+							}
+						}
+					],
+					"sid": 240560256898648,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Better to change animation here than changing sprite color. Will change later (don't change frame, change animation instead, since animation can be set by names but frames can only be set by numbers)"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 327172179029951,
+									"parameters": {
+										"first-value": "colorToSet",
+										"comparison": 0,
+										"second-value": "\"Red\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-default-color",
+									"objectClass": "Zone",
+									"sid": 884263342171474,
+									"parameters": {
+										"color": "rgbEx(100, 0, 0)"
+									}
+								}
+							],
+							"sid": 273685063450752
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 927659249206527
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 748023226152337,
+									"parameters": {
+										"first-value": "colorToSet",
+										"comparison": 0,
+										"second-value": "\"Blue\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-default-color",
+									"objectClass": "Zone",
+									"sid": 716229378696738,
+									"parameters": {
+										"color": "rgbEx(0, 0, 100)"
+									}
+								}
+							],
+							"sid": 826338454718916
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 280220632820812
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 373685899561405,
+									"parameters": {
+										"first-value": "colorToSet",
+										"comparison": 0,
+										"second-value": "\"Neutral\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-default-color",
+									"objectClass": "Zone",
+									"sid": 538396026047851,
+									"parameters": {
+										"color": "rgbEx(100, 100, 100)"
+									}
+								}
+							],
+							"sid": 984063098659026
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 193984447003877
+				},
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 991630661370696,
+					"parameters": {
+						"object": "Zone"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "SetZoneColour",
+					"sid": 525072780953219,
+					"parameters": [
+						"Zone.UID",
+						"Zone.BelongsTo"
+					]
+				}
+			],
+			"sid": 979634550823627
+		}
+	],
 	"sid": 330283638662415
 }
