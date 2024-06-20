@@ -35,7 +35,7 @@
 		},
 		{
 			"eventType": "comment",
-			"text": "Things done till now:\nDragging from one zone to other to spawn soldiers\nspawning of soldiers in the correct batch size\nBasic player properties\n\nThings to do next:\nAdd animations (not frames) to zones and soldiers for different colors\nSoldier reaching destination zone and resulting logics (different logics if destination is neutral, friendly or enemy)\nLogic for autogenerating soldiers in zones\n",
+			"text": "Things done till now:\nDragging from one zone to other to spawn soldiers\nspawning of soldiers in the correct batch size\nBasic player properties\n\nIn progress:\nSoldier reaching destination zone and resulting logics (different logics if destination is neutral, friendly or enemy)\nSoldier batch size spawn not working properly, and count of soldiers incorrect on transfer\n\nThings to do next:\nAdd animations (not frames) to zones and soldiers for different colors\nLogic for autogenerating soldiers in zones\n",
 			"text-color": [
 				0.23921568627450981,
 				0.23921568627450981,
