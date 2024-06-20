@@ -17,7 +17,9 @@
 					},
 					"uid": 2,
 					"instanceVariables": {
-						"BelongsTo": "Red"
+						"BelongsTo": "Red",
+						"CurrentlyHolding": 30,
+						"MaxGenerationCap": 30
 					},
 					"behaviors": {},
 					"template": {
@@ -59,6 +61,14 @@
 										"state": [
 											{
 												"iv": "BelongsTo",
+												"state": false
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": false
+											},
+											{
+												"iv": "MaxGenerationCap",
 												"state": false
 											}
 										]
@@ -207,7 +217,7 @@
 							"o": false,
 							"v": false,
 							"d": true,
-							"sm": "all"
+							"sm": "normal"
 						},
 						"preview": {
 							"transformX": 0,
@@ -380,7 +390,9 @@
 					},
 					"uid": 8,
 					"instanceVariables": {
-						"BelongsTo": "Red"
+						"BelongsTo": "Red",
+						"CurrentlyHolding": 30,
+						"MaxGenerationCap": 30
 					},
 					"behaviors": {},
 					"template": {
@@ -422,6 +434,14 @@
 										"state": [
 											{
 												"iv": "BelongsTo",
+												"state": false
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": false
+											},
+											{
+												"iv": "MaxGenerationCap",
 												"state": false
 											}
 										]
@@ -570,7 +590,7 @@
 							"o": false,
 							"v": false,
 							"d": true,
-							"sm": "all"
+							"sm": "normal"
 						},
 						"preview": {
 							"transformX": 0,
@@ -761,10 +781,10 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 306,
-						"y": -2,
-						"width": 168,
-						"height": 32,
+						"x": 106,
+						"y": 316,
+						"width": 225,
+						"height": 532,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -788,7 +808,9 @@
 					},
 					"uid": 17,
 					"instanceVariables": {
-						"BelongsTo": "Neutral"
+						"BelongsTo": "Neutral",
+						"CurrentlyHolding": 30,
+						"MaxGenerationCap": 30
 					},
 					"behaviors": {},
 					"template": {
@@ -831,6 +853,14 @@
 											{
 												"iv": "BelongsTo",
 												"state": true
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": false
+											},
+											{
+												"iv": "MaxGenerationCap",
+												"state": false
 											}
 										]
 									}
@@ -1151,7 +1181,9 @@
 					},
 					"uid": 22,
 					"instanceVariables": {
-						"BelongsTo": "Neutral"
+						"BelongsTo": "Neutral",
+						"CurrentlyHolding": 30,
+						"MaxGenerationCap": 30
 					},
 					"behaviors": {},
 					"template": {
@@ -1194,6 +1226,14 @@
 											{
 												"iv": "BelongsTo",
 												"state": true
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": false
+											},
+											{
+												"iv": "MaxGenerationCap",
+												"state": false
 											}
 										]
 									}
@@ -1514,7 +1554,9 @@
 					},
 					"uid": 25,
 					"instanceVariables": {
-						"BelongsTo": "Neutral"
+						"BelongsTo": "Neutral",
+						"CurrentlyHolding": 30,
+						"MaxGenerationCap": 30
 					},
 					"behaviors": {},
 					"template": {
@@ -1557,6 +1599,14 @@
 											{
 												"iv": "BelongsTo",
 												"state": true
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": false
+											},
+											{
+												"iv": "MaxGenerationCap",
+												"state": false
 											}
 										]
 									}
@@ -1905,7 +1955,7 @@
 			"uid": 20,
 			"instanceVariables": {
 				"PlayerColor": "Red",
-				"SpawnFrequency": 0.5,
+				"SpawnFrequency": 0.25,
 				"SpawnBatchSize": 4,
 				"SoldierTravelSpeed": 50,
 				"CurrentTouchID": 0,
@@ -1918,7 +1968,7 @@
 			"uid": 21,
 			"instanceVariables": {
 				"PlayerColor": "Blue",
-				"SpawnFrequency": 0.5,
+				"SpawnFrequency": 0.25,
 				"SpawnBatchSize": 4,
 				"SoldierTravelSpeed": 50,
 				"CurrentTouchID": 0,

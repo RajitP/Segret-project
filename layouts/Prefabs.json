@@ -17,7 +17,9 @@
 					},
 					"uid": 5,
 					"instanceVariables": {
-						"BelongsTo": "Neutral"
+						"BelongsTo": "Neutral",
+						"CurrentlyHolding": 0,
+						"MaxGenerationCap": 0
 					},
 					"behaviors": {},
 					"template": {
@@ -59,6 +61,14 @@
 										"state": [
 											{
 												"iv": "BelongsTo",
+												"state": true
+											},
+											{
+												"iv": "CurrentlyHolding",
+												"state": true
+											},
+											{
+												"iv": "MaxGenerationCap",
 												"state": true
 											}
 										]
@@ -373,7 +383,7 @@
 					"type": "Soldier",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
+						"initial-animation": "Red",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -381,19 +391,25 @@
 					"uid": 11,
 					"instanceVariables": {
 						"BelongsTo": "Red",
-						"DestinationZoneUID": 0
+						"sourceZoneUID": 0,
+						"destinationZoneUID": 0,
+						"destX": 0,
+						"destY": 0
 					},
 					"behaviors": {
-						"Bullet": {
+						"MoveTo": {
 							"properties": {
-								"speed": 5,
+								"max-speed": 100,
 								"acceleration": 0,
-								"gravity": 0,
-								"bounce-off-solids": false,
+								"deceleration": 0,
+								"rotate-speed": 0,
 								"set-angle": true,
-								"step": false,
+								"stop-on-solids": false,
 								"enabled": true
 							}
+						},
+						"Timer": {
+							"properties": {}
 						}
 					},
 					"template": {
@@ -438,7 +454,19 @@
 												"state": true
 											},
 											{
-												"iv": "DestinationZoneUID",
+												"iv": "destinationZoneUID",
+												"state": true
+											},
+											{
+												"iv": "destX",
+												"state": true
+											},
+											{
+												"iv": "destY",
+												"state": true
+											},
+											{
+												"iv": "sourceZoneUID",
 												"state": true
 											}
 										]
@@ -449,10 +477,10 @@
 								"id": "behavior",
 								"component": [
 									{
-										"key": "Bullet",
+										"key": "MoveTo",
 										"state": [
 											[
-												"speed",
+												"max-speed",
 												true
 											],
 											[
@@ -460,11 +488,11 @@
 												true
 											],
 											[
-												"gravity",
+												"deceleration",
 												true
 											],
 											[
-												"bounce-off-solids",
+												"rotate-speed",
 												true
 											],
 											[
@@ -472,7 +500,7 @@
 												true
 											],
 											[
-												"step",
+												"stop-on-solids",
 												true
 											],
 											[
@@ -480,6 +508,10 @@
 												true
 											]
 										]
+									},
+									{
+										"key": "Timer",
+										"state": []
 									}
 								]
 							},

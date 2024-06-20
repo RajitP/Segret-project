@@ -12,18 +12,44 @@
 			"sid": 664226608390841
 		},
 		{
-			"name": "DestinationZoneUID",
+			"name": "sourceZoneUID",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 494295982614968
+		},
+		{
+			"name": "destinationZoneUID",
 			"type": "number",
 			"desc": "UID of this soldier's destination",
-			"show": true,
+			"show": false,
 			"sid": 702374516703933
+		},
+		{
+			"name": "destX",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 686744404615732
+		},
+		{
+			"name": "destY",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 621209479944101
 		}
 	],
 	"behaviorTypes": [
 		{
-			"behaviorId": "Bullet",
-			"name": "Bullet",
-			"sid": 271729064887408
+			"behaviorId": "MoveTo",
+			"name": "MoveTo",
+			"sid": 776180541279864
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 834993339392114
 		}
 	],
 	"effectTypes": [],
@@ -39,14 +65,38 @@
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
-						"imageSpriteId": 5232591,
+						"imageSpriteId": 5595328,
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
 				"sid": 481731716455136,
-				"name": "Animation 1",
+				"name": "Red",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 16,
+						"height": 16,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4921278,
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 308457224072628,
+				"name": "Blue",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

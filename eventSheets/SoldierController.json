@@ -4,7 +4,7 @@
 		{
 			"functionName": "SpawnSoldiers",
 			"functionDescription": "Function to spawn all soldiers in a defined order.",
-			"functionCategory": "",
+			"functionCategory": "Soldier",
 			"functionReturnType": "none",
 			"functionCopyPicked": false,
 			"functionIsAsync": false,
@@ -202,6 +202,16 @@
 					"sid": 328834105555371
 				},
 				{
+					"eventType": "variable",
+					"name": "soldiersLeftToSpawn",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 821298378253479
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -214,17 +224,19 @@
 								"comparison": 0,
 								"value": "colourToSpawn"
 							}
-						},
+						}
+					],
+					"actions": [
 						{
-							"id": "every-x-seconds",
+							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 109525860526464,
+							"sid": 404192256440071,
 							"parameters": {
-								"interval-seconds": "Player.SpawnFrequency"
+								"variable": "soldiersLeftToSpawn",
+								"value": "Zone.CurrentlyHolding"
 							}
 						}
 					],
-					"actions": [],
 					"sid": 509174785033360,
 					"children": [
 						{
@@ -238,16 +250,28 @@
 							"sid": 820779681790047
 						},
 						{
+							"eventType": "variable",
+							"name": "repeatLoopIndex",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 571615585158767
+						},
+						{
+							"eventType": "comment",
+							"text": "We have to spawn soldiers in batches. So we divide the soldiers in X batches, each of Y size. Eg. if CurrentlyHolding of Zone = 30, and spawn batch size is 5, then we spawn 6 batches of 5 size each. If batch size is 4, then we spawn 7 batches of size 4 each, and then last batch of 2 soldiers."
+						},
+						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "for",
+									"id": "repeat",
 									"objectClass": "System",
-									"sid": 544587565363518,
+									"sid": 637439136746956,
 									"parameters": {
-										"name": "\"Spawn\"",
-										"start-index": "0",
-										"end-index": "Player.SpawnBatchSize - 1"
+										"count": "floor(Zone.CurrentlyHolding / Player.SpawnBatchSize) + 1"
 									}
 								}
 							],
@@ -255,66 +279,238 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 209712956556842,
+									"sid": 155950972304657,
 									"parameters": {
-										"variable": "offset",
-										"value": "(loopindex - (Player.SpawnBatchSize/2)) * Soldier.Height"
-									}
-								},
-								{
-									"id": "create-object",
-									"objectClass": "System",
-									"sid": 728332358958088,
-									"parameters": {
-										"object-to-create": "Soldier",
-										"layer": "0",
-										"x": "sourceX - (offset * sin(angleBetweenZones))",
-										"y": "sourceY + (offset * cos(angleBetweenZones))",
-										"create-hierarchy": false,
-										"template-name": "\"Soldier\""
-									}
-								},
-								{
-									"id": "set-angle",
-									"objectClass": "Soldier",
-									"sid": 863618109025954,
-									"parameters": {
-										"angle": "angleBetweenZones"
-									}
-								},
-								{
-									"id": "set-speed",
-									"objectClass": "Soldier",
-									"sid": 225428499782105,
-									"behaviorType": "Bullet",
-									"parameters": {
-										"speed": "Player.SoldierTravelSpeed"
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "Soldier",
-									"sid": 341941964417762,
-									"parameters": {
-										"instance-variable": "DestinationZoneUID",
-										"value": "DestinationZoneUID"
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "Soldier",
-									"sid": 536976498650368,
-									"parameters": {
-										"instance-variable": "BelongsTo",
-										"value": "Player.PlayerColor"
+										"variable": "repeatLoopIndex",
+										"value": "loopindex"
 									}
 								}
 							],
-							"sid": 601778286719355
+							"sid": 699325807862175,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 788385891715721,
+											"parameters": {
+												"name": "\"Spawn\"",
+												"start-index": "0",
+												"end-index": "min(Player.SpawnBatchSize - 1, soldiersLeftToSpawn-1)"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 799091367176642,
+											"parameters": {
+												"variable": "offset",
+												"value": "(loopindex(\"Spawn\") - (Player.SpawnBatchSize/2)) * Soldier.Height"
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 671662047502440,
+											"parameters": {
+												"object-to-create": "Soldier",
+												"layer": "0",
+												"x": "sourceX - (offset * sin(angleBetweenZones))",
+												"y": "sourceY + (offset * cos(angleBetweenZones))",
+												"create-hierarchy": false,
+												"template-name": "\"Soldier\""
+											}
+										},
+										{
+											"id": "subtract-from-eventvar",
+											"objectClass": "System",
+											"sid": 994879867186263,
+											"parameters": {
+												"variable": "soldiersLeftToSpawn",
+												"value": "1"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "Soldier",
+											"sid": 202061472399867,
+											"parameters": {
+												"visibility": "invisible"
+											}
+										},
+										{
+											"id": "set-angle",
+											"objectClass": "Soldier",
+											"sid": 508485446847344,
+											"parameters": {
+												"angle": "angleBetweenZones"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Soldier",
+											"sid": 343880459201881,
+											"parameters": {
+												"instance-variable": "sourceZoneUID",
+												"value": "SourceZoneUID"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Soldier",
+											"sid": 437829084483574,
+											"parameters": {
+												"instance-variable": "destinationZoneUID",
+												"value": "DestinationZoneUID"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Soldier",
+											"sid": 429812670997234,
+											"parameters": {
+												"instance-variable": "destX",
+												"value": "destinationX"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Soldier",
+											"sid": 483286270768289,
+											"parameters": {
+												"instance-variable": "destY",
+												"value": "destinationY"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Soldier",
+											"sid": 395331929479757,
+											"parameters": {
+												"instance-variable": "BelongsTo",
+												"value": "Player.PlayerColor"
+											}
+										},
+										{
+											"id": "set-animation",
+											"objectClass": "Soldier",
+											"sid": 620011507462520,
+											"parameters": {
+												"animation": "Soldier.BelongsTo",
+												"from": "beginning"
+											}
+										},
+										{
+											"id": "start-timer",
+											"objectClass": "Soldier",
+											"sid": 904204199275830,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "repeatLoopIndex * Player.SpawnFrequency",
+												"type": "once",
+												"tag": "str(Soldier.UID)"
+											}
+										}
+									],
+									"sid": 291612873555968
+								}
+							]
 						}
 					]
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "Soldier",
+					"sid": 739015770256732,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "str(Soldier.UID)"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "Soldier",
+					"sid": 132233558530485,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-max-speed",
+					"objectClass": "Soldier",
+					"sid": 817399459534935,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"max-speed": "Player.SoldierTravelSpeed"
+					}
+				},
+				{
+					"id": "move-to-position",
+					"objectClass": "Soldier",
+					"sid": 961056235087184,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"x": "Self.destX",
+						"y": "Self.destY",
+						"mode": "direct"
+					}
+				},
+				{
+					"callFunction": "ReduceFromZone",
+					"sid": 164779255787387,
+					"parameters": [
+						"Soldier.sourceZoneUID"
+					]
+				}
+			],
+			"sid": 878517177578509
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-arrived",
+					"objectClass": "Soldier",
+					"sid": 937276090004388,
+					"behaviorType": "MoveTo"
+				},
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Soldier",
+					"sid": 162016278033794,
+					"parameters": {
+						"object": "Zone"
+					}
+				},
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "Soldier",
+					"sid": 791411463738693,
+					"parameters": {
+						"instance-variable": "destinationZoneUID",
+						"comparison": 0,
+						"value": "Zone.UID"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "SoldierArrivedAtZone",
+					"sid": 404646725650233
+				}
+			],
+			"sid": 611870114922696
 		}
 	],
 	"sid": 484126003790637

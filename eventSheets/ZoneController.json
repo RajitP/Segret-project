@@ -2,9 +2,42 @@
 	"name": "ZoneController",
 	"events": [
 		{
-			"functionName": "SetZoneColour",
-			"functionDescription": "",
-			"functionCategory": "",
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 409150053674970,
+					"parameters": {
+						"object": "Zone"
+					}
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "Zone",
+					"sid": 190406062686860,
+					"parameters": {
+						"child": "ZoneCurrentCount",
+						"which": "own"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "ZoneCurrentCount",
+					"sid": 185287228958461,
+					"parameters": {
+						"text": "Zone.CurrentlyHolding & \"/\" & Zone.MaxGenerationCap"
+					}
+				}
+			],
+			"sid": 240549498040334
+		},
+		{
+			"functionName": "SetZoneOwner",
+			"functionDescription": "Function to assign who the zone belongs to",
+			"functionCategory": "Zone",
 			"functionReturnType": "none",
 			"functionCopyPicked": false,
 			"functionIsAsync": false,
@@ -169,7 +202,7 @@
 			],
 			"actions": [
 				{
-					"callFunction": "SetZoneColour",
+					"callFunction": "SetZoneOwner",
 					"sid": 525072780953219,
 					"parameters": [
 						"Zone.UID",
@@ -178,6 +211,189 @@
 				}
 			],
 			"sid": 979634550823627
+		},
+		{
+			"functionName": "SoldierArrivedAtZone",
+			"functionDescription": "Decide what to do when a soldier arrives at the zone, depending on who soldier and zone belongs to",
+			"functionCategory": "Zone",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 441682971905472,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "Zone",
+							"sid": 249304714852039,
+							"parameters": {
+								"instance-variable": "BelongsTo",
+								"comparison": 0,
+								"value": "Soldier.BelongsTo"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-instvar",
+							"objectClass": "Zone",
+							"sid": 690307796267701,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 795143572557136
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 501437337175450
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "Zone",
+							"sid": 518628182548089,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"comparison": 4,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "Zone",
+							"sid": 585113325789218,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 188403278297991
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 277436638951640
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "Zone",
+							"sid": 663563688288987,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"comparison": 3,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "Zone",
+							"sid": 628577502881473,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 968301683192987,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "SetZoneOwner",
+									"sid": 441008939966847,
+									"parameters": [
+										"Zone.UID",
+										"Soldier.BelongsTo"
+									]
+								}
+							],
+							"sid": 368194766599345
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "Soldier",
+							"sid": 657986874349540
+						}
+					],
+					"sid": 409357250988554
+				}
+			]
+		},
+		{
+			"functionName": "ReduceFromZone",
+			"functionDescription": "",
+			"functionCategory": "Zone",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "zoneUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 343801952815291
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 655182763976325,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Zone",
+							"sid": 996078648343121,
+							"parameters": {
+								"unique-id": "zoneUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "Zone",
+							"sid": 573505513057170,
+							"parameters": {
+								"instance-variable": "CurrentlyHolding",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 239508331003023
+				}
+			]
 		}
 	],
 	"sid": 330283638662415

@@ -10,6 +10,20 @@
 			"desc": "Can either belong to Red, Blue or Neutral (case sensitive)",
 			"show": true,
 			"sid": 287754317988624
+		},
+		{
+			"name": "CurrentlyHolding",
+			"type": "number",
+			"desc": "Number of soldiers that this zone is currently holding",
+			"show": true,
+			"sid": 630384743080699
+		},
+		{
+			"name": "MaxGenerationCap",
+			"type": "number",
+			"desc": "Max soldiers that this zone can auto generate. It can hold more than this if transferred manually",
+			"show": true,
+			"sid": 526604957091789
 		}
 	],
 	"behaviorTypes": [],

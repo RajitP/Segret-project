@@ -48,6 +48,83 @@
 				0.7450980392156863,
 				1
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 782916881649580
+				}
+			],
+			"actions": [],
+			"sid": 211454036255408,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "repIndex",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 101439308029551
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 603844113966028,
+							"parameters": {
+								"count": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 741660821813171,
+							"parameters": {
+								"variable": "repIndex",
+								"value": "loopindex"
+							}
+						}
+					],
+					"sid": 133637540048593,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 399860216385472,
+									"parameters": {
+										"name": "\"testLoop\"",
+										"start-index": "1",
+										"end-index": "3"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "append-text",
+									"objectClass": "DebugText",
+									"sid": 842841380559340,
+									"parameters": {
+										"text": "\"Repeat index : \" & repIndex & \"   for index : \" & loopindex(\"testLoop\") & newline"
+									}
+								}
+							],
+							"sid": 886674606189723
+						}
+					]
+				}
+			]
 		}
 	],
 	"sid": 228797126610280
