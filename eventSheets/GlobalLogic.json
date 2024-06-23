@@ -35,7 +35,7 @@
 		},
 		{
 			"eventType": "comment",
-			"text": "Things done till now:\nDragging from one zone to other to spawn soldiers\nspawning of soldiers in the correct batch size\nBasic player properties\n\nIn progress:\nSoldier reaching destination zone and resulting logics (different logics if destination is neutral, friendly or enemy)\nSoldier batch size spawn not working properly, and count of soldiers incorrect on transfer\n\nThings to do next:\nAdd animations (not frames) to zones and soldiers for different colors\nLogic for autogenerating soldiers in zones\n",
+			"text": "Things done till now:\nDragging from one zone to other to spawn soldiers\nspawning of soldiers in the correct batch size\nBasic player properties\nSoldier reaching destination zone and resulting logics (different logics if destination is neutral, friendly or enemy)\n\nIn progress:\nSoldier batch size spawn not working properly, and count of soldiers incorrect on transfer\n\nThings to do next:\nAdd animations (not frames) to zones and soldiers for different colors\nLogic for autogenerating soldiers in zones\n",
 			"text-color": [
 				0.23921568627450981,
 				0.23921568627450981,
@@ -47,83 +47,6 @@
 				0.996078431372549,
 				0.7450980392156863,
 				1
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-start-of-layout",
-					"objectClass": "System",
-					"sid": 782916881649580
-				}
-			],
-			"actions": [],
-			"sid": 211454036255408,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "repIndex",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 101439308029551
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "repeat",
-							"objectClass": "System",
-							"sid": 603844113966028,
-							"parameters": {
-								"count": "5"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 741660821813171,
-							"parameters": {
-								"variable": "repIndex",
-								"value": "loopindex"
-							}
-						}
-					],
-					"sid": 133637540048593,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "for",
-									"objectClass": "System",
-									"sid": 399860216385472,
-									"parameters": {
-										"name": "\"testLoop\"",
-										"start-index": "1",
-										"end-index": "3"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "append-text",
-									"objectClass": "DebugText",
-									"sid": 842841380559340,
-									"parameters": {
-										"text": "\"Repeat index : \" & repIndex & \"   for index : \" & loopindex(\"testLoop\") & newline"
-									}
-								}
-							],
-							"sid": 886674606189723
-						}
-					]
-				}
 			]
 		}
 	],

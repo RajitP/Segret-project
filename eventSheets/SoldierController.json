@@ -326,6 +326,14 @@
 											}
 										},
 										{
+											"id": "append-text",
+											"objectClass": "DebugText",
+											"sid": 467790550080662,
+											"parameters": {
+												"text": "loopindex(\"Spawn\") & \" : \""
+											}
+										},
+										{
 											"id": "subtract-from-eventvar",
 											"objectClass": "System",
 											"sid": 994879867186263,
@@ -408,12 +416,56 @@
 											"id": "start-timer",
 											"objectClass": "Soldier",
 											"sid": 904204199275830,
+											"disabled": true,
 											"behaviorType": "Timer",
 											"parameters": {
 												"duration": "repeatLoopIndex * Player.SpawnFrequency",
 												"type": "once",
 												"tag": "str(Soldier.UID)"
 											}
+										},
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 821437512121310,
+											"parameters": {
+												"seconds": "repeatLoopIndex * Player.SpawnFrequency"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "Soldier",
+											"sid": 288327285942811,
+											"parameters": {
+												"visibility": "visible"
+											}
+										},
+										{
+											"id": "set-max-speed",
+											"objectClass": "Soldier",
+											"sid": 435849649825215,
+											"behaviorType": "MoveTo",
+											"parameters": {
+												"max-speed": "Player.SoldierTravelSpeed"
+											}
+										},
+										{
+											"id": "move-to-position",
+											"objectClass": "Soldier",
+											"sid": 460007047450539,
+											"behaviorType": "MoveTo",
+											"parameters": {
+												"x": "Self.destX",
+												"y": "Self.destY",
+												"mode": "direct"
+											}
+										},
+										{
+											"callFunction": "ReduceFromZone",
+											"sid": 769744168889254,
+											"parameters": [
+												"Soldier.sourceZoneUID"
+											]
 										}
 									],
 									"sid": 291612873555968
@@ -467,6 +519,14 @@
 					}
 				},
 				{
+					"id": "append-text",
+					"objectClass": "DebugText",
+					"sid": 205622690517186,
+					"parameters": {
+						"text": "Soldier.UID & \" - \""
+					}
+				},
+				{
 					"callFunction": "ReduceFromZone",
 					"sid": 164779255787387,
 					"parameters": [
@@ -474,7 +534,8 @@
 					]
 				}
 			],
-			"sid": 878517177578509
+			"sid": 878517177578509,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -507,7 +568,16 @@
 			"actions": [
 				{
 					"callFunction": "SoldierArrivedAtZone",
-					"sid": 404646725650233
+					"sid": 826074703157447,
+					"parameters": [
+						"Soldier.UID",
+						"Zone.UID"
+					]
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Soldier",
+					"sid": 207907930372860
 				}
 			],
 			"sid": 611870114922696

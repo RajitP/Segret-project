@@ -217,11 +217,43 @@
 			"functionDescription": "Decide what to do when a soldier arrives at the zone, depending on who soldier and zone belongs to",
 			"functionCategory": "Zone",
 			"functionReturnType": "none",
-			"functionCopyPicked": true,
+			"functionCopyPicked": false,
 			"functionIsAsync": false,
-			"functionParameters": [],
+			"functionParameters": [
+				{
+					"name": "soldierUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 778298048470321
+				},
+				{
+					"name": "zoneUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 804860371217229
+				}
+			],
 			"eventType": "function-block",
-			"conditions": [],
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "Soldier",
+					"sid": 369856135511440,
+					"parameters": {
+						"unique-id": "soldierUID"
+					}
+				},
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "Zone",
+					"sid": 303977375131700,
+					"parameters": {
+						"unique-id": "zoneUID"
+					}
+				}
+			],
 			"actions": [],
 			"sid": 441682971905472,
 			"children": [
@@ -336,14 +368,8 @@
 				{
 					"eventType": "block",
 					"conditions": [],
-					"actions": [
-						{
-							"id": "destroy",
-							"objectClass": "Soldier",
-							"sid": 657986874349540
-						}
-					],
-					"sid": 409357250988554
+					"actions": [],
+					"sid": 472900749427033
 				}
 			]
 		},
